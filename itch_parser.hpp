@@ -199,7 +199,8 @@ class ItchParser {
 public:
   ItchParser() {}
 
-  void parse_order(const void *payload_ptr, size_t size, char type, SpscQueue<ParsedMessage, 1024> &q) {
+  template <typename QueueType>
+  void parse_order(const void *payload_ptr, size_t size, char type, QueueType &q) {
     if (size == 0)
       return;
 

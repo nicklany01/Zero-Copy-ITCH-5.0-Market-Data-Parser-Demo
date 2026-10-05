@@ -28,7 +28,10 @@ benchmark:
 	$(CXX) $(CXXFLAGS_BASE) $(RELEASE_FLAGS) -o build/benchmark benchmark.cpp -lbenchmark -lbenchmark_main
 
 run-benchmark: benchmark
-	sudo perf stat -e L1-dcache-load-misses,cache-misses,context-switches ./build/benchmark --benchmark_filter=BM_ITCHParser
+	@echo "=== Profiling Zero-Copy Parser ==="
+	sudo perf stat -e L1-dcache-load-misses,cache-misses,context-switches ./build/benchmark --benchmark_filter=BM_ITCHParser_ZeroCopy
+	@echo "=== Profiling Non-Zero-Copy Parser ==="
+	sudo perf stat -e L1-dcache-load-misses,cache-misses,context-switches ./build/benchmark --benchmark_filter=BM_ITCHParser_NonZeroCopy
 
 clean:
 	rm -rf build/
