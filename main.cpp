@@ -53,6 +53,8 @@ int main() {
     return 1;
   }
 
+  madvise(ptr, sb.st_size, MADV_SEQUENTIAL);
+
   SpscQueue<ParsedMessage, 1024> q;
   ItchParser parser;
 
